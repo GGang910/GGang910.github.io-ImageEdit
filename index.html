@@ -584,6 +584,7 @@
             max-width: 100%; max-height: 100%;
             border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             cursor: crosshair;
+            touch-action: none;
         }
         
         /* 이미지 네비게이션 버튼 */
@@ -2331,6 +2332,95 @@
         });
         
         editorCanvas.addEventListener('mouseleave', () => {
+            if (isDrawing && currentTool !== 'rect') {
+                isDrawing = false;
+                saveHistory();
+            }
+        });
+        
+        // 터치 이벤트 (모바일)
+        function getTouchPos(e) {
+            const rect = editorCanvas.getBoundingClientRect();
+            const scaleX = editorCanvas.width / rect.width;
+            const scaleY = editorCanvas.height / rect.height;
+            const touch = e.touches[0] || e.changedTouches[0];
+            return {
+                x: (touch.clientX - rect.left) * scaleX,
+                y: (touch.clientY - rect.top) * scaleY
+            };
+        }
+        
+        editorCanvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getTouchPos(e);
+            lastX = pos.x;
+            lastY = pos.y;
+            startX = lastX;
+            startY = lastY;
+            
+            if (currentTool === 'rect') {
+                tempCanvas = document.createElement('canvas');
+                tempCanvas.width = editorCanvas.width;
+                tempCanvas.height = editorCanvas.height;
+                tempCanvas.getContext('2d').drawImage(editorCanvas, 0, 0);
+            } else if (currentTool === 'brush-mosaic') {
+                drawMosaic(lastX, lastY, parseInt(toolSize.value));
+            } else if (currentTool === 'brush-color') {
+                drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value);
+            }
+        }, { passive: false });
+        
+        editorCanvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            e.preventDefault();
+            
+            const pos = getTouchPos(e);
+            const x = pos.x;
+            const y = pos.y;
+            
+            if (currentTool === 'brush-mosaic') {
+                drawMosaic(x, y, parseInt(toolSize.value));
+            } else if (currentTool === 'brush-color') {
+                drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value);
+            } else if (currentTool === 'rect' && tempCanvas) {
+                editorCtx.drawImage(tempCanvas, 0, 0);
+                editorCtx.strokeStyle = toolColor.value;
+                editorCtx.lineWidth = 2;
+                editorCtx.setLineDash([5, 5]);
+                editorCtx.strokeRect(
+                    Math.min(startX, x), Math.min(startY, y),
+                    Math.abs(x - startX), Math.abs(y - startY)
+                );
+                editorCtx.setLineDash([]);
+            }
+            
+            lastX = x;
+            lastY = y;
+        }, { passive: false });
+        
+        editorCanvas.addEventListener('touchend', (e) => {
+            if (!isDrawing) return;
+            isDrawing = false;
+            
+            if (currentTool === 'rect' && tempCanvas) {
+                const pos = getTouchPos(e);
+                editorCtx.drawImage(tempCanvas, 0, 0);
+                
+                const rx = Math.min(startX, pos.x);
+                const ry = Math.min(startY, pos.y);
+                const rw = Math.abs(pos.x - startX);
+                const rh = Math.abs(pos.y - startY);
+                editorCtx.fillStyle = toolColor.value;
+                editorCtx.fillRect(rx, ry, rw, rh);
+                
+                tempCanvas = null;
+            }
+            
+            saveHistory();
+        });
+        
+        editorCanvas.addEventListener('touchcancel', () => {
             if (isDrawing && currentTool !== 'rect') {
                 isDrawing = false;
                 saveHistory();

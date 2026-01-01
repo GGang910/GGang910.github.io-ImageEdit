@@ -1,2 +1,2 @@
-# GGang910.github.io-ImageEdit
+# ImageEdit
 이미지 편집

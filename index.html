@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 깡통 이미지 편집기 </title>
+    <title>깡통 이미지 편집기</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
@@ -649,6 +649,11 @@
             background: rgba(128, 128, 128, 0.2);
             border-color: #666;
         }
+        .brush-cursor.eraser {
+            border-style: dotted;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #00aa00;
+        }
         
         /* 저장 확인 모달 */
         .save-modal {
@@ -1012,6 +1017,11 @@
                             <button class="tool-btn" data-tool="rect" title="사각형">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                </svg>
+                            </button>
+                            <button class="tool-btn" data-tool="eraser" title="지우개 (원본 복원)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16.24 3.56l4.95 4.94c.78.79.78 2.05 0 2.84L12 20.53a4.008 4.008 0 0 1-5.66 0L2.81 17c-.78-.79-.78-2.05 0-2.84l10.6-10.6c.79-.78 2.05-.78 2.83 0M4.22 15.58l3.54 3.53c.78.79 2.04.79 2.83 0l3.53-3.53l-4.95-4.95l-4.95 4.95z"/>
                                 </svg>
                             </button>
                         </div>
@@ -1879,7 +1889,8 @@
         
         let editingIndex = null;
         let originalImage = null;
-        let currentTool = 'brush-color'; // brush-color, brush-mosaic, rect
+        let originalCanvas = null; // 원본 이미지 캔버스 (지우개용)
+        let currentTool = 'brush-color'; // brush-color, brush-mosaic, rect, eraser
         let isDrawing = false;
         let lastX = 0, lastY = 0;
         let startX = 0, startY = 0;
@@ -1903,6 +1914,7 @@
             brushCursor.style.top = e.clientY + 'px';
             
             brushCursor.classList.toggle('mosaic', currentTool === 'brush-mosaic');
+            brushCursor.classList.toggle('eraser', currentTool === 'eraser');
         }
         
         // 캔버스 영역에서 브러시 커서 표시
@@ -1943,8 +1955,8 @@
                 btn.classList.add('active');
                 currentTool = btn.dataset.tool;
                 
-                // 모자이크 브러시일 때는 색상 선택 숨기기
-                colorRow.style.display = currentTool === 'brush-mosaic' ? 'none' : 'flex';
+                // 모자이크/지우개 브러시일 때는 색상 선택 숨기기
+                colorRow.style.display = (currentTool === 'brush-mosaic' || currentTool === 'eraser') ? 'none' : 'flex';
                 
                 // 사각형 도구면 브러시 커서 숨기기
                 if (currentTool === 'rect') {
@@ -2063,6 +2075,13 @@
                 editorCanvas.dataset.scale = w / img.width;
                 
                 editorCtx.drawImage(img, 0, 0, w, h);
+                
+                // 원본 캔버스 저장 (지우개용)
+                originalCanvas = document.createElement('canvas');
+                originalCanvas.width = w;
+                originalCanvas.height = h;
+                originalCanvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                
                 saveHistory(true);
                 updateNavButtons();
             };
@@ -2100,6 +2119,13 @@
                 editorCanvas.dataset.scale = w / img.width;
                 
                 editorCtx.drawImage(img, 0, 0, w, h);
+                
+                // 원본 캔버스 저장 (지우개용)
+                originalCanvas = document.createElement('canvas');
+                originalCanvas.width = w;
+                originalCanvas.height = h;
+                originalCanvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                
                 saveHistory(true); // 초기 상태는 변경사항 아님
                 updateNavButtons();
                 
@@ -2216,6 +2242,40 @@
             editorCtx.stroke();
         }
         
+        // 지우개 (원본 복원)
+        function drawEraser(x, y, size) {
+            if (!originalCanvas) return;
+            
+            const radius = size / 2;
+            const sx = Math.max(0, Math.floor(x - radius));
+            const sy = Math.max(0, Math.floor(y - radius));
+            const ex = Math.min(editorCanvas.width, Math.ceil(x + radius));
+            const ey = Math.min(editorCanvas.height, Math.ceil(y + radius));
+            
+            // 클리핑 마스크로 원형 영역만 복원
+            editorCtx.save();
+            editorCtx.beginPath();
+            editorCtx.arc(x, y, radius, 0, Math.PI * 2);
+            editorCtx.clip();
+            editorCtx.drawImage(originalCanvas, sx, sy, ex - sx, ey - sy, sx, sy, ex - sx, ey - sy);
+            editorCtx.restore();
+        }
+        
+        // 지우개 선 그리기
+        function drawEraserLine(x1, y1, x2, y2, size) {
+            if (!originalCanvas) return;
+            
+            const dist = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+            const steps = Math.max(1, Math.floor(dist / (size / 4)));
+            
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const x = x1 + (x2 - x1) * t;
+                const y = y1 + (y2 - y1) * t;
+                drawEraser(x, y, size);
+            }
+        }
+        
         // 사각형 모자이크 그리기
         function drawRectMosaic(x1, y1, x2, y2) {
             const x = Math.min(x1, x2);
@@ -2283,6 +2343,8 @@
                 drawMosaic(lastX, lastY, parseInt(toolSize.value));
             } else if (currentTool === 'brush-color') {
                 drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value);
+            } else if (currentTool === 'eraser') {
+                drawEraser(lastX, lastY, parseInt(toolSize.value));
             }
         });
         
@@ -2300,6 +2362,8 @@
                 drawMosaic(x, y, parseInt(toolSize.value));
             } else if (currentTool === 'brush-color') {
                 drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value);
+            } else if (currentTool === 'eraser') {
+                drawEraserLine(lastX, lastY, x, y, parseInt(toolSize.value));
             } else if (currentTool === 'rect' && tempCanvas) {
                 // 임시 캔버스에서 복원 후 사각형 미리보기
                 editorCtx.drawImage(tempCanvas, 0, 0);
@@ -2379,6 +2443,8 @@
                 drawMosaic(lastX, lastY, parseInt(toolSize.value));
             } else if (currentTool === 'brush-color') {
                 drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value);
+            } else if (currentTool === 'eraser') {
+                drawEraser(lastX, lastY, parseInt(toolSize.value));
             }
         }
         
@@ -2400,6 +2466,8 @@
                 drawMosaic(x, y, parseInt(toolSize.value));
             } else if (currentTool === 'brush-color') {
                 drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value);
+            } else if (currentTool === 'eraser') {
+                drawEraserLine(lastX, lastY, x, y, parseInt(toolSize.value));
             } else if (currentTool === 'rect' && tempCanvas) {
                 editorCtx.drawImage(tempCanvas, 0, 0);
                 editorCtx.strokeStyle = toolColor.value;

@@ -135,6 +135,9 @@
         .image-item:hover { border-color: var(--accent-soft); }
         .image-item.selected { border-color: var(--select-border); background: var(--select-bg); box-shadow: 0 0 0 3px var(--select-bg); }
         .image-item.long-press-active { transform: scale(0.95); opacity: 0.8; }
+        .image-item.dragging { opacity: 0.4; }
+        .image-item.drop-before::before { content: ''; position: absolute; left: -14px; top: 0; bottom: 0; width: 6px; background: var(--accent); border-radius: 3px; z-index: 10; }
+        .image-item.drop-after::after { content: ''; position: absolute; right: -14px; top: 0; bottom: 0; width: 6px; background: var(--accent); border-radius: 3px; z-index: 10; }
         .image-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; pointer-events: none; }
         .image-order { position: absolute; top: 10px; left: 10px; background: var(--badge-bg); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
         .image-checkbox { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; background: rgba(255,255,255,0.9); border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: transparent; pointer-events: none; }
@@ -306,7 +309,7 @@
                         <button class="action-btn" id="deselectAllBtn" disabled>선택 해제</button>
                         <button class="action-btn danger" id="deleteSelectedBtn" disabled>선택 삭제</button>
                     </div>
-                    <div class="help-text" id="helpText">💡 <span>클릭</span> 다중 선택 • <span>더블클릭</span> 편집 • <span>Shift+클릭</span> 범위 선택</div>
+                    <div class="help-text" id="helpText">💡 <span>클릭</span> 다중 선택 • <span>더블클릭</span> 편집 • <span>Shift+클릭</span> 범위 선택 • <span>드래그</span> 순서 이동</div>
                     <div class="image-grid" id="imageGrid"></div>
                 </div>
             </div>
@@ -400,7 +403,12 @@
         let longPressTimer = null, longPressTarget = null;
         const LONG_PRESS_DURATION = 500;
 
-        if (isMobile) helpText.innerHTML = '💡 <span>탭</span> 다중 선택 • <span>더블탭</span> 편집 • <span>길게 누르기</span> 범위 선택';
+        if (isMobile) helpText.innerHTML = '💡 <span>탭</span> 다중 선택 • <span>더블탭</span> 편집 • <span>길게 누르기</span> 범위 선택 • <span>드래그</span> 순서 이동';
+
+        // 드래그 관련 변수
+        let isDraggingItems = false;
+        let dropTargetIdx = null;
+        let dropPosition = null;
 
         function showToast(message, duration = 2000) { toast.textContent = message; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), duration); }
 
@@ -436,7 +444,7 @@
             const baseName = baseFilenameInput.value.trim(), format = document.querySelector('input[name="format"]:checked').value;
             imageGrid.innerHTML = selectedFiles.map((file, i) => {
                 let outputName = baseName === '' ? `${i + 1}.${format}` : selectedFiles.length > 1 ? `${baseName}${i + 1}.${format}` : `${baseName}.${format}`;
-                return `<div class="image-item ${selectedIndices.has(i) ? 'selected' : ''}" data-index="${i}"><img class="image-thumb" src="${filePreviews[i]}" alt=""><div class="image-order">${i + 1}</div><div class="image-checkbox">✔</div><div class="image-info"><div class="image-name" title="${file.name}">${file.name}</div><div class="image-size">${formatSize(file.size)}</div><div class="image-output">→ ${outputName}</div></div></div>`;
+                return `<div class="image-item ${selectedIndices.has(i) ? 'selected' : ''}" data-index="${i}" draggable="true"><img class="image-thumb" src="${filePreviews[i]}" alt=""><div class="image-order">${i + 1}</div><div class="image-checkbox">✔</div><div class="image-info"><div class="image-name" title="${file.name}">${file.name}</div><div class="image-size">${formatSize(file.size)}</div><div class="image-output">→ ${outputName}</div></div></div>`;
             }).join('');
             bindImageEvents();
         }
@@ -450,6 +458,83 @@
                     else { if (selectedIndices.has(idx)) selectedIndices.delete(idx); else selectedIndices.add(idx); lastClickedIndex = idx; }
                     updateImageGrid(); updateSelectionUI();
                 });
+
+                // 드래그 시작
+                item.addEventListener('dragstart', (e) => {
+                    if (!selectedIndices.has(idx)) {
+                        selectedIndices.clear();
+                        selectedIndices.add(idx);
+                        updateSelectionUI();
+                    }
+                    isDraggingItems = true;
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', '');
+                    setTimeout(() => {
+                        document.querySelectorAll('.image-item').forEach(el => {
+                            if (selectedIndices.has(parseInt(el.dataset.index))) el.classList.add('dragging');
+                        });
+                    }, 0);
+                });
+
+                // 드래그 오버
+                item.addEventListener('dragover', (e) => {
+                    if (!isDraggingItems) return;
+                    if (selectedIndices.has(idx)) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    const rect = item.getBoundingClientRect();
+                    const newPosition = e.clientX < rect.left + rect.width / 2 ? 'before' : 'after';
+                    if (dropTargetIdx !== idx || dropPosition !== newPosition) {
+                        document.querySelectorAll('.image-item').forEach(el => el.classList.remove('drop-before', 'drop-after'));
+                        dropTargetIdx = idx;
+                        dropPosition = newPosition;
+                        item.classList.add(`drop-${newPosition}`);
+                    }
+                });
+
+                item.addEventListener('dragleave', (e) => {
+                    if (item.contains(e.relatedTarget)) return;
+                    item.classList.remove('drop-before', 'drop-after');
+                    if (dropTargetIdx === idx) { dropTargetIdx = null; dropPosition = null; }
+                });
+
+                // 드롭
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (!isDraggingItems || dropTargetIdx === null) return;
+                    if (selectedIndices.has(idx)) return;
+
+                    let dropIndex = dropPosition === 'before' ? idx : idx + 1;
+                    const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
+                    const movedItems = sortedIndices.map(i => ({ file: selectedFiles[i], preview: filePreviews[i] }));
+
+                    for (let i = sortedIndices.length - 1; i >= 0; i--) {
+                        selectedFiles.splice(sortedIndices[i], 1);
+                        filePreviews.splice(sortedIndices[i], 1);
+                    }
+
+                    let adjustedDropIndex = dropIndex;
+                    sortedIndices.forEach(i => { if (i < dropIndex) adjustedDropIndex--; });
+
+                    for (let i = 0; i < movedItems.length; i++) {
+                        selectedFiles.splice(adjustedDropIndex + i, 0, movedItems[i].file);
+                        filePreviews.splice(adjustedDropIndex + i, 0, movedItems[i].preview);
+                    }
+
+                    selectedIndices = new Set(movedItems.map((_, i) => adjustedDropIndex + i));
+                    dropTargetIdx = null;
+                    dropPosition = null;
+                    updateImageGrid();
+                    updateSelectionUI();
+                });
+
+                item.addEventListener('dragend', () => {
+                    isDraggingItems = false;
+                    dropTargetIdx = null;
+                    dropPosition = null;
+                    document.querySelectorAll('.image-item').forEach(el => el.classList.remove('dragging', 'drop-before', 'drop-after'));
+                });
+
                 if (isMobile) {
                     let touchMoved = false;
                     item.addEventListener('touchstart', () => { touchMoved = false; longPressTarget = idx; longPressTimer = setTimeout(() => { if (!touchMoved && longPressTarget === idx) { item.classList.add('long-press-active'); if (lastClickedIndex !== null) { const start = Math.min(lastClickedIndex, idx), end = Math.max(lastClickedIndex, idx); for (let i = start; i <= end; i++) selectedIndices.add(i); showToast(`${end - start + 1}개 범위 선택됨`); } else { selectedIndices.add(idx); lastClickedIndex = idx; showToast('범위 선택 시작점 설정'); } updateImageGrid(); updateSelectionUI(); setTimeout(() => item.classList.remove('long-press-active'), 200); } }, LONG_PRESS_DURATION); }, { passive: true });

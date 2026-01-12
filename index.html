@@ -8,32 +8,9 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --transition: 0.3s ease; }
-
-        [data-theme="pink"] {
-            --bg: #fff5f7; --card: #ffffff; --border: #ffccd9;
-            --text: #3d3035; --text-secondary: #6d5f64;
-            --accent: #ff6b96; --accent-soft: #ffb3c6; --accent-bg: #fff0f3;
-            --button-text: #ffffff; --shadow: rgba(255, 107, 150, 0.2);
-            --input-bg: #fff8fa; --badge-bg: #ff6b96;
-            --select-bg: rgba(255, 107, 150, 0.12); --select-border: #ff6b96;
-        }
-        [data-theme="blue"] {
-            --bg: #f5f9ff; --card: #ffffff; --border: #c5daff;
-            --text: #2a3542; --text-secondary: #5a6a7a;
-            --accent: #4a8cff; --accent-soft: #a3c7ff; --accent-bg: #f0f6ff;
-            --button-text: #ffffff; --shadow: rgba(74, 140, 255, 0.2);
-            --input-bg: #f8fbff; --badge-bg: #4a8cff;
-            --select-bg: rgba(74, 140, 255, 0.12); --select-border: #4a8cff;
-        }
-        [data-theme="dark"] {
-            --bg: #0f0f14; --card: #1a1a22; --border: #3a3a48;
-            --text: #f0f0f5; --text-secondary: #a0a0b0;
-            --accent: #b49cff; --accent-soft: #8b7acc; --accent-bg: #28283a;
-            --button-text: #ffffff; --shadow: rgba(0, 0, 0, 0.4);
-            --input-bg: #22222c; --badge-bg: #b49cff;
-            --select-bg: rgba(180, 156, 255, 0.15); --select-border: #b49cff;
-        }
-
+        [data-theme="pink"] { --bg: #fff5f7; --card: #ffffff; --border: #ffccd9; --text: #3d3035; --text-secondary: #6d5f64; --accent: #ff6b96; --accent-soft: #ffb3c6; --accent-bg: #fff0f3; --button-text: #ffffff; --shadow: rgba(255, 107, 150, 0.2); --input-bg: #fff8fa; --badge-bg: #ff6b96; --select-bg: rgba(255, 107, 150, 0.12); --select-border: #ff6b96; }
+        [data-theme="blue"] { --bg: #f5f9ff; --card: #ffffff; --border: #c5daff; --text: #2a3542; --text-secondary: #5a6a7a; --accent: #4a8cff; --accent-soft: #a3c7ff; --accent-bg: #f0f6ff; --button-text: #ffffff; --shadow: rgba(74, 140, 255, 0.2); --input-bg: #f8fbff; --badge-bg: #4a8cff; --select-bg: rgba(74, 140, 255, 0.12); --select-border: #4a8cff; }
+        [data-theme="dark"] { --bg: #0f0f14; --card: #1a1a22; --border: #3a3a48; --text: #f0f0f5; --text-secondary: #a0a0b0; --accent: #b49cff; --accent-soft: #8b7acc; --accent-bg: #28283a; --button-text: #ffffff; --shadow: rgba(0, 0, 0, 0.4); --input-bg: #22222c; --badge-bg: #b49cff; --select-bg: rgba(180, 156, 255, 0.15); --select-border: #b49cff; }
         body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); min-height: 100vh; padding: 32px 20px; transition: background var(--transition); }
         .wrapper { max-width: 1500px; margin: 0 auto; }
         .theme-switcher { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; }
@@ -45,7 +22,7 @@
         .theme-btn.dark { background: linear-gradient(135deg, #4a4a5a, #1a1a22); }
         .main-layout { display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start; }
         @media (max-width: 1100px) { .main-layout { grid-template-columns: 1fr; } }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px 28px; box-shadow: 0 8px 32px var(--shadow); transition: all var(--transition); }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px 28px; box-shadow: 0 8px 32px var(--shadow); }
         .settings-panel .card { position: sticky; top: 20px; }
         .header { text-align: center; margin-bottom: 28px; }
         .logo { font-size: 42px; margin-bottom: 8px; }
@@ -73,13 +50,12 @@
         .quality-section { margin-top: 16px; }
         .quality-row { display: flex; align-items: center; gap: 12px; }
         .quality-slider { flex: 1; -webkit-appearance: none; height: 8px; background: var(--border); border-radius: 4px; outline: none; }
-        .quality-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--accent); border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
+        .quality-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--accent); border-radius: 50%; cursor: pointer; }
         .quality-input { width: 60px; padding: 8px 10px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 8px; font-size: 15px; font-weight: 700; font-family: inherit; color: var(--accent); text-align: center; }
         .quality-input:focus { outline: none; border-color: var(--accent); }
         .quality-input::-webkit-inner-spin-button, .quality-input::-webkit-outer-spin-button { -webkit-appearance: none; }
         .quality-percent { font-size: 15px; font-weight: 700; color: var(--text-secondary); }
         .format-hint { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 12px; background: rgba(100, 180, 255, 0.1); border: 1px solid rgba(100, 180, 255, 0.3); border-radius: 8px; font-size: 12px; }
-        .hint-icon { font-size: 14px; }
         .hint-text { color: var(--text-secondary); font-weight: 500; }
         .quality-warning { margin-top: 10px; padding: 8px 12px; background: rgba(255, 180, 100, 0.15); border: 1px solid rgba(255, 150, 50, 0.3); border-radius: 8px; font-size: 12px; color: #cc8800; font-weight: 600; display: none; }
         .quality-warning.active { display: block; }
@@ -99,17 +75,14 @@
         .toggle-switch input:checked ~ .toggle-label { color: var(--accent); }
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; }
-        .modal { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: modalIn 0.2s ease; }
-        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
         .modal-icon { font-size: 48px; margin-bottom: 16px; }
         .modal-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
         .modal-desc { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5; }
         .modal-buttons { display: flex; gap: 12px; }
         .modal-btn { flex: 1; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; }
         .modal-btn.cancel { background: var(--input-bg); color: var(--text-secondary); border: 2px solid var(--border); }
-        .modal-btn.cancel:hover { border-color: var(--accent); color: var(--accent); }
         .modal-btn.confirm { background: #ff5c5c; color: white; }
-        .modal-btn.confirm:hover { background: #ff4040; }
         .status { margin-top: 16px; padding: 14px; border-radius: 12px; text-align: center; font-size: 15px; font-weight: 600; display: none; }
         .status.success { display: block; background: rgba(0, 200, 140, 0.15); color: #00b080; border: 1px solid rgba(0, 200, 140, 0.3); }
         .status.error { display: block; background: rgba(255, 90, 90, 0.15); color: #ff5050; border: 1px solid rgba(255, 90, 90, 0.3); }
@@ -131,10 +104,9 @@
         .image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-height: calc(100vh - 280px); overflow-y: auto; padding: 32px 60px; background: var(--input-bg); border-radius: 12px; min-height: 200px; }
         @media (max-width: 1200px) { .image-grid { grid-template-columns: repeat(3, 1fr); padding: 28px 40px; } }
         @media (max-width: 900px) { .image-grid { grid-template-columns: repeat(2, 1fr); padding: 24px 32px; } }
-        .image-item { position: relative; border-radius: 14px; overflow: hidden; background: var(--card); border: 3px solid var(--border); transition: all 0.15s ease; cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+        .image-item { position: relative; border-radius: 14px; overflow: hidden; background: var(--card); border: 3px solid var(--border); transition: all 0.15s ease; cursor: pointer; user-select: none; }
         .image-item:hover { border-color: var(--accent-soft); }
         .image-item.selected { border-color: var(--select-border); background: var(--select-bg); box-shadow: 0 0 0 3px var(--select-bg); }
-        .image-item.long-press-active { transform: scale(0.95); opacity: 0.8; }
         .image-item.dragging { opacity: 0.4; }
         .image-item.drop-before::before { content: ''; position: absolute; left: -14px; top: 0; bottom: 0; width: 6px; background: var(--accent); border-radius: 3px; z-index: 10; }
         .image-item.drop-after::after { content: ''; position: absolute; right: -14px; top: 0; bottom: 0; width: 6px; background: var(--accent); border-radius: 3px; z-index: 10; }
@@ -146,21 +118,18 @@
         .image-name { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
         .image-size { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
         .image-output { font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); }
+        .image-download-btn { position: absolute; bottom: 70px; right: 10px; width: 32px; height: 32px; background: var(--accent); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.2s; }
+        .image-item:hover .image-download-btn { opacity: 1; }
+        .image-download-btn:hover { filter: brightness(1.1); transform: scale(1.1); }
         .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-secondary); }
         .empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.6; }
         .empty-text { font-size: 16px; font-weight: 500; line-height: 1.6; }
-        .image-grid::-webkit-scrollbar { width: 8px; }
-        .image-grid::-webkit-scrollbar-track { background: var(--input-bg); border-radius: 4px; }
-        .image-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--card); border: 2px solid var(--accent); color: var(--text); padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px var(--shadow); z-index: 1500; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
         .toast.active { opacity: 1; }
-        @media (max-width: 600px) { .main-layout { gap: 20px; } .card { padding: 24px 20px; } h1 { font-size: 22px; } }
-
-        /* 에디터 스타일 */
         .editor-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(8px); }
         .editor-overlay.active { display: flex; }
         body.editor-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
-        .editor-container { background: var(--card); border-radius: 20px; max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalIn 0.2s ease; overflow: hidden; }
+        .editor-container { background: var(--card); border-radius: 20px; max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); overflow: hidden; }
         .editor-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
         .editor-title { font-size: 18px; font-weight: 700; color: var(--text); }
         .editor-header-btns { display: flex; align-items: center; gap: 8px; }
@@ -170,45 +139,75 @@
         .editor-close { width: 36px; height: 36px; border-radius: 50%; background: var(--input-bg); border: 2px solid var(--border); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all 0.2s; }
         .editor-close:hover { border-color: var(--accent); color: var(--accent); }
         .editor-body { display: flex; flex: 1; overflow: hidden; }
-        .editor-toolbar { width: 180px; background: var(--input-bg); border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+        .editor-toolbar { width: 240px; background: var(--input-bg); border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
         .tool-section { display: flex; flex-direction: column; gap: 8px; }
         .tool-section-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
-        .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .tool-btn { aspect-ratio: 1; border-radius: 10px; background: var(--card); border: 2px solid var(--border); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--text); }
+        .tool-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+        .tool-btn { aspect-ratio: 1; border-radius: 8px; background: var(--card); border: 2px solid var(--border); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--text); }
         .tool-btn:hover { border-color: var(--accent-soft); }
         .tool-btn.active { border-color: var(--accent); background: var(--accent-bg); }
         .tool-divider { height: 1px; background: var(--border); margin: 4px 0; }
-        .option-group { display: flex; flex-direction: column; gap: 12px; }
-        .option-row { display: flex; align-items: center; gap: 8px; }
-        .option-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); min-width: 36px; }
+        .option-group { display: flex; flex-direction: column; gap: 10px; }
+        .option-row { display: flex; align-items: center; gap: 6px; }
+        .option-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); min-width: 28px; }
         .option-slider { flex: 1; -webkit-appearance: none; height: 6px; background: var(--border); border-radius: 3px; }
-        .option-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; cursor: pointer; }
-        .option-input { width: 50px; padding: 6px 8px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 6px; font-size: 13px; font-weight: 700; font-family: inherit; color: var(--accent); text-align: center; }
+        .option-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; cursor: pointer; }
+        .option-input { width: 50px; padding: 4px 6px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 6px; font-size: 12px; font-weight: 700; font-family: inherit; color: var(--accent); text-align: center; }
         .option-input:focus { outline: none; border-color: var(--accent); }
-        .color-row { display: flex; align-items: center; gap: 8px; }
-        .color-picker { flex: 1; height: 32px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; padding: 2px; }
+        .color-row { display: flex; align-items: center; gap: 6px; }
+        .color-picker { flex: 1; height: 28px; border: 2px solid var(--border); border-radius: 6px; cursor: pointer; padding: 2px; }
+        .crop-options { display: none; flex-direction: column; gap: 8px; margin-top: 8px; padding: 10px; background: var(--card); border: 2px solid var(--accent); border-radius: 8px; }
+        .crop-options.active { display: flex; }
+        .crop-info { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600; }
+        .crop-info span { color: var(--accent); font-weight: 700; }
+        .crop-mode-row { display: flex; gap: 4px; margin-bottom: 6px; }
+        .crop-mode-btn { flex: 1; padding: 6px; border: 2px solid var(--border); border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; font-family: inherit; background: var(--input-bg); color: var(--text-secondary); }
+        .crop-mode-btn.active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+        .crop-input-row { display: flex; align-items: center; gap: 4px; }
+        .crop-input-row label { font-size: 10px; font-weight: 600; color: var(--text-secondary); min-width: 16px; }
+        .crop-input { width: 70px; padding: 4px 6px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 6px; font-size: 11px; font-weight: 700; font-family: inherit; color: var(--accent); text-align: center; }
+        .crop-input:focus { outline: none; border-color: var(--accent); }
+        .crop-btn-row { display: flex; gap: 4px; margin-top: 4px; }
+        .crop-apply-btn { flex: 1; padding: 6px; border: none; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; background: var(--accent); color: white; }
+        .crop-apply-btn:hover { filter: brightness(1.1); }
+        .crop-apply-btn.all { background: #00b080; }
+        .crop-reset-btn { padding: 6px 10px; border: 2px solid var(--border); border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; background: var(--input-bg); color: var(--text-secondary); }
+        .crop-reset-btn:hover { border-color: var(--accent); color: var(--accent); }
         .editor-canvas-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: var(--bg); min-width: 500px; min-height: 400px; position: relative; }
         .editor-canvas { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); cursor: crosshair; touch-action: none; }
-        .img-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10; }
+        .img-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10; user-select: none; }
         .img-nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); transform: translateY(-50%) scale(1.1); }
         .img-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .img-nav-btn.prev { left: 10px; }
         .img-nav-btn.next { right: 10px; }
+        .crop-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none; }
+        .crop-overlay.active { display: block; pointer-events: auto; }
+        .crop-box { position: absolute; border: 2px dashed var(--accent); background: transparent; cursor: move; box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); }
+        .crop-handle { position: absolute; width: 14px; height: 14px; background: var(--accent); border: 2px solid white; border-radius: 50%; }
+        .crop-handle.nw { top: -7px; left: -7px; cursor: nw-resize; }
+        .crop-handle.ne { top: -7px; right: -7px; cursor: ne-resize; }
+        .crop-handle.sw { bottom: -7px; left: -7px; cursor: sw-resize; }
+        .crop-handle.se { bottom: -7px; right: -7px; cursor: se-resize; }
+        .crop-handle.n { top: -7px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
+        .crop-handle.s { bottom: -7px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
+        .crop-handle.w { top: 50%; left: -7px; transform: translateY(-50%); cursor: w-resize; }
+        .crop-handle.e { top: 50%; right: -7px; transform: translateY(-50%); cursor: e-resize; }
+        .crop-size-label { position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; white-space: nowrap; }
         .brush-cursor { position: fixed; border: 2px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; display: none; transform: translate(-50%, -50%); background: rgba(255, 107, 150, 0.15); }
         .brush-cursor.active { display: block; }
         .brush-cursor.mosaic { border-style: dashed; background: rgba(128, 128, 128, 0.2); border-color: #666; }
         .brush-cursor.eraser { border-style: dotted; background: rgba(255, 255, 255, 0.3); border-color: #00aa00; }
         .save-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 4000; backdrop-filter: blur(4px); }
         .save-modal.active { display: flex; }
-        .save-modal-content { background: var(--card); border-radius: 16px; padding: 28px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalIn 0.2s ease; }
+        .save-modal-content { background: var(--card); border-radius: 16px; padding: 28px; max-width: 380px; width: 90%; text-align: center; }
         .save-modal-icon { font-size: 48px; margin-bottom: 16px; }
         .save-modal-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
         .save-modal-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
         .save-modal-buttons { display: flex; gap: 10px; }
-        .save-modal-btn { flex: 1; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; border: none; }
+        .save-modal-btn { flex: 1; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; border: none; }
         .save-modal-btn.discard { background: var(--input-bg); color: #ff5c5c; border: 2px solid #ff5c5c; }
         .save-modal-btn.cancel { background: var(--input-bg); color: var(--text-secondary); border: 2px solid var(--border); }
-        .save-modal-btn.save { background: var(--accent); color: white; border: 2px solid var(--accent); }
+        .save-modal-btn.save { background: var(--accent); color: white; }
         .editor-footer { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-top: 1px solid var(--border); }
         .editor-shortcut { font-size: 12px; color: var(--text-secondary); }
         .editor-shortcut kbd { background: var(--input-bg); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-family: inherit; font-weight: 600; }
@@ -218,27 +217,25 @@
         .editor-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
         .editor-btn.primary { background: var(--accent); border: none; color: white; }
         .editor-btn.primary:hover { filter: brightness(1.1); }
-
         @media (max-width: 768px) {
             .editor-container { max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; border-radius: 0; }
             .editor-body { flex-direction: column; }
-            .editor-toolbar { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 12px; gap: 12px; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; }
-            .tool-section { flex-direction: row; align-items: center; gap: 8px; }
+            .editor-toolbar { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 10px; gap: 10px; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; }
+            .tool-section { flex-direction: row; align-items: center; gap: 6px; }
             .tool-section-title { display: none; }
-            .tool-grid { display: flex; gap: 6px; }
-            .tool-btn { width: 40px; height: 40px; }
-            .tool-divider { width: 1px; height: 30px; margin: 0 4px; }
-            .option-group { flex-direction: row; align-items: center; gap: 8px; }
-            .option-row { flex: 1; min-width: 120px; }
+            .tool-grid { display: flex; gap: 4px; }
+            .tool-btn { width: 36px; height: 36px; }
+            .tool-divider { width: 1px; height: 28px; margin: 0 4px; }
             .editor-canvas-area { min-width: unset; min-height: 200px; padding: 10px; }
             .img-nav-btn { width: 36px; height: 36px; font-size: 16px; }
-            .img-nav-btn.prev { left: 5px; }
-            .img-nav-btn.next { right: 5px; }
             .editor-footer { flex-direction: column; gap: 12px; padding: 12px 16px; }
             .editor-shortcut { font-size: 10px; text-align: center; }
             .editor-buttons { width: 100%; }
             .editor-btn { flex: 1; padding: 14px 16px; }
         }
+        .meta-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 700; margin-top: 4px; display: inline-block; }
+        .meta-badge.has-meta { background: #ffcccc; color: #cc0000; }
+        .meta-badge.no-meta { background: #ccffcc; color: #008800; }
     </style>
 </head>
 <body>
@@ -257,7 +254,7 @@
                         <p class="subtitle">메타데이터 제거 & 일괄 변환 & 이름 변경 & 이미지 편집</p>
                     </div>
                     <div class="upload-area" id="uploadArea">
-                        <div class="upload-icon">📁</div>
+                        <div class="upload-icon">📂</div>
                         <div class="upload-text"><span>클릭</span> 또는 <span>드래그</span>로 업로드<br>PNG, JPG, WebP, GIF</div>
                     </div>
                     <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,image/gif" multiple>
@@ -309,7 +306,7 @@
                         <button class="action-btn" id="deselectAllBtn" disabled>선택 해제</button>
                         <button class="action-btn danger" id="deleteSelectedBtn" disabled>선택 삭제</button>
                     </div>
-                    <div class="help-text" id="helpText">💡 <span>클릭</span> 다중 선택 • <span>더블클릭</span> 편집 • <span>Shift+클릭</span> 범위 선택 • <span>드래그</span> 순서 이동</div>
+                    <div class="help-text" id="helpText">💡 <span>클릭</span> 다중 선택 • <span>더블클릭</span> 편집 • <span>Shift+클릭</span> 범위 선택 • <span>드래그</span> 순서 이동 • <span>⬇버튼</span> 개별 다운</div>
                     <div class="image-grid" id="imageGrid"></div>
                 </div>
             </div>
@@ -343,24 +340,53 @@
                     <div class="tool-section">
                         <div class="tool-section-title">도구</div>
                         <div class="tool-grid">
-                            <button class="tool-btn active" data-tool="brush-color" title="단색 브러시"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg></button>
-                            <button class="tool-btn" data-tool="brush-mosaic" title="모자이크 브러시"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></button>
-                            <button class="tool-btn" data-tool="rect" title="사각형"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></button>
-                            <button class="tool-btn" data-tool="eraser" title="지우개"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.24 3.56l4.95 4.94c.78.79.78 2.05 0 2.84L12 20.53a4.008 4.008 0 0 1-5.66 0L2.81 17c-.78-.79-.78-2.05 0-2.84l10.6-10.6c.79-.78 2.05-.78 2.83 0M4.22 15.58l3.54 3.53c.78.79 2.04.79 2.83 0l3.53-3.53l-4.95-4.95l-4.95 4.95z"/></svg></button>
-                        </div>
+                    <button class="tool-btn active" data-tool="brush-color" title="브러시">🖌️</button>
+                    <button class="tool-btn" data-tool="brush-mosaic" title="모자이크">🔲</button>
+                    <button class="tool-btn" data-tool="rect" title="사각형">⬛</button>
+                    <button class="tool-btn" data-tool="eraser" title="지우개">🧽</button>
+                    <button class="tool-btn" data-tool="crop" title="자르기">✂️</button>
+                </div>
                     </div>
                     <div class="tool-divider"></div>
                     <div class="tool-section">
                         <div class="tool-section-title">옵션</div>
                         <div class="option-group">
-                            <div class="option-row"><span class="option-label">크기</span><input type="range" class="option-slider" id="toolSize" min="5" max="100" value="30"><input type="number" class="option-input" id="toolSizeInput" min="5" max="100" value="30"></div>
+                            <div class="option-row" id="sizeRow"><span class="option-label">크기</span><input type="range" class="option-slider" id="toolSize" min="5" max="100" value="30"><input type="number" class="option-input" id="toolSizeInput" min="5" max="100" value="30"></div>
                             <div class="color-row" id="colorRow"><span class="option-label">색상</span><input type="color" class="color-picker" id="toolColor" value="#000000"></div>
+                            <div class="crop-options" id="cropOptions">
+                                <div class="crop-info">현재: <span id="cropCurrentSize">0 x 0</span></div>
+                                <div class="crop-input-row">
+                                    <label>X</label><input type="number" class="crop-input" id="cropX" value="0">
+                                    <label>Y</label><input type="number" class="crop-input" id="cropY" value="0">
+                                </div>
+                                <div class="crop-input-row">
+                                    <label>W</label><input type="number" class="crop-input" id="cropW" value="100">
+                                    <label>H</label><input type="number" class="crop-input" id="cropH" value="100">
+                                </div>
+                                <div class="crop-btn-row">
+                                    <button class="crop-apply-btn" id="cropApplyBtn">자르기</button>
+                                    <button class="crop-apply-btn all" id="cropApplyAllBtn">전체적용</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="editor-canvas-area">
                     <button class="img-nav-btn prev" id="imgPrevBtn">◀</button>
                     <canvas class="editor-canvas" id="editorCanvas"></canvas>
+                    <div class="crop-overlay" id="cropOverlay">
+                        <div class="crop-box" id="cropBox">
+                            <div class="crop-handle nw" data-handle="nw"></div>
+                            <div class="crop-handle n" data-handle="n"></div>
+                            <div class="crop-handle ne" data-handle="ne"></div>
+                            <div class="crop-handle w" data-handle="w"></div>
+                            <div class="crop-handle e" data-handle="e"></div>
+                            <div class="crop-handle sw" data-handle="sw"></div>
+                            <div class="crop-handle s" data-handle="s"></div>
+                            <div class="crop-handle se" data-handle="se"></div>
+                            <div class="crop-size-label" id="cropSizeLabel">100 x 100</div>
+                        </div>
+                    </div>
                     <button class="img-nav-btn next" id="imgNextBtn">▶</button>
                 </div>
             </div>
@@ -388,27 +414,17 @@
         </div>
     </div>
     <div class="toast" id="toast"></div>
-
-    <script>
+<script>
         document.querySelectorAll('.theme-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.documentElement.setAttribute('data-theme', btn.dataset.theme); }); });
         document.querySelectorAll('.format-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }); });
 
-        const uploadArea = document.getElementById('uploadArea'), fileInput = document.getElementById('fileInput'), filenameSection = document.getElementById('filenameSection'), formatSection = document.getElementById('formatSection'), qualitySection = document.getElementById('qualitySection'), qualitySlider = document.getElementById('qualitySlider'), qualityInput = document.getElementById('qualityInput'), baseFilenameInput = document.getElementById('baseFilename'), previewPanel = document.getElementById('previewPanel'), imageGrid = document.getElementById('imageGrid'), fileCountBadge = document.getElementById('fileCountBadge'), processBtn = document.getElementById('processBtn'), deleteSelectedBtn = document.getElementById('deleteSelectedBtn'), selectAllBtn = document.getElementById('selectAllBtn'), deselectAllBtn = document.getElementById('deselectAllBtn'), selectedCountBadge = document.getElementById('selectedCountBadge'), status = document.getElementById('status'), modalOverlay = document.getElementById('modalOverlay'), modalTitle = document.getElementById('modalTitle'), modalDesc = document.getElementById('modalDesc'), modalCancel = document.getElementById('modalCancel'), modalConfirm = document.getElementById('modalConfirm'), removeMetadataToggle = document.getElementById('removeMetadata'), metadataLabel = document.getElementById('metadataLabel'), toggleSection = document.querySelector('.toggle-section'), helpText = document.getElementById('helpText'), toast = document.getElementById('toast');
+        const uploadArea = document.getElementById('uploadArea'), fileInput = document.getElementById('fileInput'), filenameSection = document.getElementById('filenameSection'), formatSection = document.getElementById('formatSection'), qualitySection = document.getElementById('qualitySection'), qualitySlider = document.getElementById('qualitySlider'), qualityInput = document.getElementById('qualityInput'), baseFilenameInput = document.getElementById('baseFilename'), previewPanel = document.getElementById('previewPanel'), imageGrid = document.getElementById('imageGrid'), fileCountBadge = document.getElementById('fileCountBadge'), processBtn = document.getElementById('processBtn'), deleteSelectedBtn = document.getElementById('deleteSelectedBtn'), selectAllBtn = document.getElementById('selectAllBtn'), deselectAllBtn = document.getElementById('deselectAllBtn'), selectedCountBadge = document.getElementById('selectedCountBadge'), status = document.getElementById('status'), modalOverlay = document.getElementById('modalOverlay'), modalTitle = document.getElementById('modalTitle'), modalDesc = document.getElementById('modalDesc'), modalCancel = document.getElementById('modalCancel'), modalConfirm = document.getElementById('modalConfirm'), removeMetadataToggle = document.getElementById('removeMetadata'), metadataLabel = document.getElementById('metadataLabel'), toggleSection = document.querySelector('.toggle-section'), toast = document.getElementById('toast');
 
         removeMetadataToggle.addEventListener('change', () => { metadataLabel.textContent = removeMetadataToggle.checked ? 'ON' : 'OFF'; });
 
         let selectedFiles = [], filePreviews = [], selectedIndices = new Set(), pendingDeleteAction = null, lastClickedIndex = null;
         const supportedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        let longPressTimer = null, longPressTarget = null;
-        const LONG_PRESS_DURATION = 500;
-
-        if (isMobile) helpText.innerHTML = '💡 <span>탭</span> 다중 선택 • <span>더블탭</span> 편집 • <span>길게 누르기</span> 범위 선택 • <span>드래그</span> 순서 이동';
-
-        // 드래그 관련 변수
-        let isDraggingItems = false;
-        let dropTargetIdx = null;
-        let dropPosition = null;
+        let isDraggingItems = false, dropTargetIdx = null, dropPosition = null;
 
         function showToast(message, duration = 2000) { toast.textContent = message; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), duration); }
 
@@ -439,13 +455,19 @@
         function updateUI() { const hasFiles = selectedFiles.length > 0; filenameSection.classList.toggle('active', hasFiles); formatSection.classList.toggle('active', hasFiles); toggleSection.classList.toggle('active', hasFiles); processBtn.classList.toggle('active', hasFiles); previewPanel.classList.toggle('active', hasFiles); fileCountBadge.textContent = `${selectedFiles.length}개`; updateImageGrid(); updateSelectionUI(); hideStatus(); }
         function updateSelectionUI() { const count = selectedIndices.size; selectedCountBadge.textContent = `${count}개`; deselectAllBtn.disabled = count === 0; deleteSelectedBtn.disabled = count === 0; selectAllBtn.textContent = count === selectedFiles.length && selectedFiles.length > 0 ? '전체 해제' : '전체 선택'; }
 
-        function updateImageGrid() {
+        async function updateImageGrid() {
             if (selectedFiles.length === 0) { imageGrid.innerHTML = '<div class="empty-state"><div class="empty-icon">🖼️</div><div class="empty-text">이미지를 업로드하면<br>여기에 미리보기가 표시됩니다</div></div>'; return; }
             const baseName = baseFilenameInput.value.trim(), format = document.querySelector('input[name="format"]:checked').value;
-            imageGrid.innerHTML = selectedFiles.map((file, i) => {
+            
+            let html = '';
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const file = selectedFiles[i];
+                const hasMeta = await checkMetadata(file);
                 let outputName = baseName === '' ? `${i + 1}.${format}` : selectedFiles.length > 1 ? `${baseName}${i + 1}.${format}` : `${baseName}.${format}`;
-                return `<div class="image-item ${selectedIndices.has(i) ? 'selected' : ''}" data-index="${i}" draggable="true"><img class="image-thumb" src="${filePreviews[i]}" alt=""><div class="image-order">${i + 1}</div><div class="image-checkbox">✔</div><div class="image-info"><div class="image-name" title="${file.name}">${file.name}</div><div class="image-size">${formatSize(file.size)}</div><div class="image-output">→ ${outputName}</div></div></div>`;
-            }).join('');
+                const metaBadge = hasMeta ? '<span class="meta-badge has-meta">메타O</span>' : '<span class="meta-badge no-meta">메타X</span>';
+                html += `<div class="image-item ${selectedIndices.has(i) ? 'selected' : ''}" data-index="${i}" draggable="true"><img class="image-thumb" src="${filePreviews[i]}" alt=""><div class="image-order">${i + 1}</div><div class="image-checkbox">✓</div><button class="image-download-btn" data-idx="${i}" title="개별 다운로드">⬇</button><div class="image-info"><div class="image-name" title="${file.name}">${file.name}</div><div class="image-size">${formatSize(file.size)} ${metaBadge}</div><div class="image-output">→ ${outputName}</div></div></div>`;
+            }
+            imageGrid.innerHTML = html;
             bindImageEvents();
         }
 
@@ -454,96 +476,93 @@
                 const idx = parseInt(item.dataset.index);
                 item.addEventListener('dblclick', (e) => { e.preventDefault(); openEditor(idx); });
                 item.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('image-download-btn')) return;
                     if (e.shiftKey && lastClickedIndex !== null) { const start = Math.min(lastClickedIndex, idx), end = Math.max(lastClickedIndex, idx); for (let i = start; i <= end; i++) selectedIndices.add(i); }
                     else { if (selectedIndices.has(idx)) selectedIndices.delete(idx); else selectedIndices.add(idx); lastClickedIndex = idx; }
                     updateImageGrid(); updateSelectionUI();
                 });
-
-                // 드래그 시작
                 item.addEventListener('dragstart', (e) => {
-                    if (!selectedIndices.has(idx)) {
-                        selectedIndices.clear();
-                        selectedIndices.add(idx);
-                        updateSelectionUI();
-                    }
-                    isDraggingItems = true;
-                    e.dataTransfer.effectAllowed = 'move';
-                    e.dataTransfer.setData('text/plain', '');
-                    setTimeout(() => {
-                        document.querySelectorAll('.image-item').forEach(el => {
-                            if (selectedIndices.has(parseInt(el.dataset.index))) el.classList.add('dragging');
-                        });
-                    }, 0);
+                    if (!selectedIndices.has(idx)) { selectedIndices.clear(); selectedIndices.add(idx); updateSelectionUI(); }
+                    isDraggingItems = true; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', '');
+                    setTimeout(() => { document.querySelectorAll('.image-item').forEach(el => { if (selectedIndices.has(parseInt(el.dataset.index))) el.classList.add('dragging'); }); }, 0);
                 });
-
-                // 드래그 오버
                 item.addEventListener('dragover', (e) => {
-                    if (!isDraggingItems) return;
-                    if (selectedIndices.has(idx)) return;
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'move';
-                    const rect = item.getBoundingClientRect();
-                    const newPosition = e.clientX < rect.left + rect.width / 2 ? 'before' : 'after';
-                    if (dropTargetIdx !== idx || dropPosition !== newPosition) {
-                        document.querySelectorAll('.image-item').forEach(el => el.classList.remove('drop-before', 'drop-after'));
-                        dropTargetIdx = idx;
-                        dropPosition = newPosition;
-                        item.classList.add(`drop-${newPosition}`);
-                    }
+                    if (!isDraggingItems || selectedIndices.has(idx)) return;
+                    e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+                    const rect = item.getBoundingClientRect(), newPosition = e.clientX < rect.left + rect.width / 2 ? 'before' : 'after';
+                    if (dropTargetIdx !== idx || dropPosition !== newPosition) { document.querySelectorAll('.image-item').forEach(el => el.classList.remove('drop-before', 'drop-after')); dropTargetIdx = idx; dropPosition = newPosition; item.classList.add(`drop-${newPosition}`); }
                 });
-
-                item.addEventListener('dragleave', (e) => {
-                    if (item.contains(e.relatedTarget)) return;
-                    item.classList.remove('drop-before', 'drop-after');
-                    if (dropTargetIdx === idx) { dropTargetIdx = null; dropPosition = null; }
-                });
-
-                // 드롭
+                item.addEventListener('dragleave', (e) => { if (item.contains(e.relatedTarget)) return; item.classList.remove('drop-before', 'drop-after'); if (dropTargetIdx === idx) { dropTargetIdx = null; dropPosition = null; } });
                 item.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    if (!isDraggingItems || dropTargetIdx === null) return;
-                    if (selectedIndices.has(idx)) return;
-
+                    e.preventDefault(); if (!isDraggingItems || dropTargetIdx === null || selectedIndices.has(idx)) return;
                     let dropIndex = dropPosition === 'before' ? idx : idx + 1;
-                    const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
-                    const movedItems = sortedIndices.map(i => ({ file: selectedFiles[i], preview: filePreviews[i] }));
-
-                    for (let i = sortedIndices.length - 1; i >= 0; i--) {
-                        selectedFiles.splice(sortedIndices[i], 1);
-                        filePreviews.splice(sortedIndices[i], 1);
-                    }
-
-                    let adjustedDropIndex = dropIndex;
-                    sortedIndices.forEach(i => { if (i < dropIndex) adjustedDropIndex--; });
-
-                    for (let i = 0; i < movedItems.length; i++) {
-                        selectedFiles.splice(adjustedDropIndex + i, 0, movedItems[i].file);
-                        filePreviews.splice(adjustedDropIndex + i, 0, movedItems[i].preview);
-                    }
-
-                    selectedIndices = new Set(movedItems.map((_, i) => adjustedDropIndex + i));
-                    dropTargetIdx = null;
-                    dropPosition = null;
-                    updateImageGrid();
-                    updateSelectionUI();
+                    const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b), movedItems = sortedIndices.map(i => ({ file: selectedFiles[i], preview: filePreviews[i] }));
+                    for (let i = sortedIndices.length - 1; i >= 0; i--) { selectedFiles.splice(sortedIndices[i], 1); filePreviews.splice(sortedIndices[i], 1); }
+                    let adjustedDropIndex = dropIndex; sortedIndices.forEach(i => { if (i < dropIndex) adjustedDropIndex--; });
+                    for (let i = 0; i < movedItems.length; i++) { selectedFiles.splice(adjustedDropIndex + i, 0, movedItems[i].file); filePreviews.splice(adjustedDropIndex + i, 0, movedItems[i].preview); }
+                    selectedIndices = new Set(movedItems.map((_, i) => adjustedDropIndex + i)); dropTargetIdx = null; dropPosition = null; updateImageGrid(); updateSelectionUI();
                 });
-
-                item.addEventListener('dragend', () => {
-                    isDraggingItems = false;
-                    dropTargetIdx = null;
-                    dropPosition = null;
-                    document.querySelectorAll('.image-item').forEach(el => el.classList.remove('dragging', 'drop-before', 'drop-after'));
+                item.addEventListener('dragend', () => { isDraggingItems = false; dropTargetIdx = null; dropPosition = null; document.querySelectorAll('.image-item').forEach(el => el.classList.remove('dragging', 'drop-before', 'drop-after')); });
+            });
+            document.querySelectorAll('.image-download-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const idx = parseInt(btn.dataset.idx);
+                    const baseName = baseFilenameInput.value.trim(), format = document.querySelector('input[name="format"]:checked').value, quality = parseInt(qualityInput.value) / 100, shouldRemoveMetadata = removeMetadataToggle.checked;
+                    let outputName = baseName === '' ? `${idx + 1}.${format}` : selectedFiles.length > 1 ? `${baseName}${idx + 1}.${format}` : `${baseName}.${format}`;
+                    await processAndDownload(selectedFiles[idx], outputName, format, quality, shouldRemoveMetadata);
+                    showToast('다운로드 완료!');
                 });
-
-                if (isMobile) {
-                    let touchMoved = false;
-                    item.addEventListener('touchstart', () => { touchMoved = false; longPressTarget = idx; longPressTimer = setTimeout(() => { if (!touchMoved && longPressTarget === idx) { item.classList.add('long-press-active'); if (lastClickedIndex !== null) { const start = Math.min(lastClickedIndex, idx), end = Math.max(lastClickedIndex, idx); for (let i = start; i <= end; i++) selectedIndices.add(i); showToast(`${end - start + 1}개 범위 선택됨`); } else { selectedIndices.add(idx); lastClickedIndex = idx; showToast('범위 선택 시작점 설정'); } updateImageGrid(); updateSelectionUI(); setTimeout(() => item.classList.remove('long-press-active'), 200); } }, LONG_PRESS_DURATION); }, { passive: true });
-                    item.addEventListener('touchmove', () => { touchMoved = true; if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } }, { passive: true });
-                    item.addEventListener('touchend', () => { if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; } longPressTarget = null; }, { passive: true });
-                }
             });
         }
-
+        async function checkMetadata(file) {
+            try {
+                const buffer = await file.arrayBuffer();
+                const uint8 = new Uint8Array(buffer);
+                
+                if (file.type === 'image/png') {
+                    let offset = 8;
+                    const metaChunks = ['tEXt','iTXt','zTXt','eXIf','iCCP'];
+                    while (offset < buffer.byteLength - 12) {
+                        const type = String.fromCharCode(uint8[offset+4], uint8[offset+5], uint8[offset+6], uint8[offset+7]);
+                        if (metaChunks.includes(type)) return true;
+                        const length = (uint8[offset] << 24) | (uint8[offset+1] << 16) | (uint8[offset+2] << 8) | uint8[offset+3];
+                        offset += 12 + length;
+                        if (type === 'IEND') break;
+                    }
+                    return false;
+                }
+                
+                if (file.type === 'image/jpeg') {
+                    let offset = 2;
+                    while (offset < buffer.byteLength - 4) {
+                        if (uint8[offset] !== 0xFF) { offset++; continue; }
+                        const marker = uint8[offset + 1];
+                        if (marker >= 0xE1 && marker <= 0xEF) return true;
+                        if (marker === 0xFE) return true;
+                        if (marker === 0xDA || marker === 0xD9) break;
+                        if (marker === 0xD8 || (marker >= 0xD0 && marker <= 0xD7)) { offset += 2; continue; }
+                        const length = (uint8[offset + 2] << 8) | uint8[offset + 3];
+                        offset += 2 + length;
+                    }
+                    return false;
+                }
+                
+                if (file.type === 'image/webp') {
+                    let offset = 12;
+                    const metaChunks = ['EXIF','XMP ','ICCP'];
+                    while (offset < buffer.byteLength - 8) {
+                        const fourCC = String.fromCharCode(uint8[offset], uint8[offset+1], uint8[offset+2], uint8[offset+3]);
+                        if (metaChunks.includes(fourCC)) return true;
+                        const size = uint8[offset+4] | (uint8[offset+5] << 8) | (uint8[offset+6] << 16) | (uint8[offset+7] << 24);
+                        offset += 8 + size + (size % 2);
+                    }
+                    return false;
+                }
+                
+                return false;
+            } catch (e) { return false; }
+        }
         function formatSize(bytes) { if (bytes < 1024) return bytes + ' B'; if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / 1048576).toFixed(1) + ' MB'; }
         function scrambleAlphaLSB(imageData) { const data = imageData.data; for (let i = 3; i < data.length; i += 4) if (data[i] > 0) data[i] = (data[i] & 0xFE) | (Math.random() < 0.5 ? 0 : 1); return imageData; }
 
@@ -559,75 +578,268 @@
 
         function showStatus(msg, type) { status.textContent = msg; status.className = `status ${type}`; }
         function hideStatus() { status.className = 'status'; }
-
-        // 에디터
-        const editorOverlay = document.getElementById('editorOverlay'), editorCanvas = document.getElementById('editorCanvas'), editorClose = document.getElementById('editorClose'), editorCancel = document.getElementById('editorCancel'), editorSave = document.getElementById('editorSave'), toolSize = document.getElementById('toolSize'), toolSizeInput = document.getElementById('toolSizeInput'), toolColor = document.getElementById('toolColor'), colorRow = document.getElementById('colorRow'), undoBtn = document.getElementById('undoBtn'), redoBtn = document.getElementById('redoBtn'), imgPrevBtn = document.getElementById('imgPrevBtn'), imgNextBtn = document.getElementById('imgNextBtn'), brushCursor = document.getElementById('brushCursor'), saveModal = document.getElementById('saveModal'), saveModalDiscard = document.getElementById('saveModalDiscard'), saveModalCancel = document.getElementById('saveModalCancel'), saveModalSave = document.getElementById('saveModalSave'), editorCtx = editorCanvas.getContext('2d');
+// 에디터
+        const editorOverlay = document.getElementById('editorOverlay'), editorCanvas = document.getElementById('editorCanvas'), editorClose = document.getElementById('editorClose'), editorCancel = document.getElementById('editorCancel'), editorSave = document.getElementById('editorSave'), toolSize = document.getElementById('toolSize'), toolSizeInput = document.getElementById('toolSizeInput'), toolColor = document.getElementById('toolColor'), colorRow = document.getElementById('colorRow'), sizeRow = document.getElementById('sizeRow'), undoBtn = document.getElementById('undoBtn'), redoBtn = document.getElementById('redoBtn'), imgPrevBtn = document.getElementById('imgPrevBtn'), imgNextBtn = document.getElementById('imgNextBtn'), brushCursor = document.getElementById('brushCursor'), saveModal = document.getElementById('saveModal'), saveModalDiscard = document.getElementById('saveModalDiscard'), saveModalCancel = document.getElementById('saveModalCancel'), saveModalSave = document.getElementById('saveModalSave'), editorCtx = editorCanvas.getContext('2d');
+        const cropOverlay = document.getElementById('cropOverlay'), cropBox = document.getElementById('cropBox'), cropOptions = document.getElementById('cropOptions'), cropW = document.getElementById('cropW'), cropH = document.getElementById('cropH'), cropApplyBtn = document.getElementById('cropApplyBtn'), cropApplyAllBtn = document.getElementById('cropApplyAllBtn'), cropSizeLabel = document.getElementById('cropSizeLabel'), cropCurrentSize = document.getElementById('cropCurrentSize');
 
         let editingIndex = null, originalImage = null, originalCanvas = null, currentTool = 'brush-color', isDrawing = false, lastX = 0, lastY = 0, startX = 0, startY = 0, historyStack = [], redoStack = [], tempCanvas = null, hasChanges = false, pendingAction = null;
+        let cropState = { x: 0, y: 0, w: 100, h: 100 }, isCropping = false, cropAction = null, cropStartX = 0, cropStartY = 0, cropStartState = null, cropMode = 'size';
 
         const canvasArea = document.querySelector('.editor-canvas-area');
-        canvasArea.addEventListener('mouseenter', (e) => { if (currentTool !== 'rect') { brushCursor.classList.add('active'); updateBrushCursor(e); } });
+        canvasArea.addEventListener('mouseenter', (e) => { if (currentTool !== 'rect' && currentTool !== 'crop') { brushCursor.classList.add('active'); updateBrushCursor(e); } });
         canvasArea.addEventListener('mousemove', updateBrushCursor);
         canvasArea.addEventListener('mouseleave', () => brushCursor.classList.remove('active'));
 
-        function updateBrushCursor(e) { if (currentTool === 'rect') { brushCursor.classList.remove('active'); return; } const size = parseInt(toolSize.value); brushCursor.style.width = size + 'px'; brushCursor.style.height = size + 'px'; brushCursor.style.left = e.clientX + 'px'; brushCursor.style.top = e.clientY + 'px'; brushCursor.classList.toggle('mosaic', currentTool === 'brush-mosaic'); brushCursor.classList.toggle('eraser', currentTool === 'eraser'); }
+        function updateBrushCursor(e) { if (currentTool === 'rect' || currentTool === 'crop') { brushCursor.classList.remove('active'); return; } const size = parseInt(toolSize.value); brushCursor.style.width = size + 'px'; brushCursor.style.height = size + 'px'; brushCursor.style.left = e.clientX + 'px'; brushCursor.style.top = e.clientY + 'px'; brushCursor.classList.toggle('mosaic', currentTool === 'brush-mosaic'); brushCursor.classList.toggle('eraser', currentTool === 'eraser'); }
 
         toolSize.addEventListener('input', () => toolSizeInput.value = toolSize.value);
         toolSizeInput.addEventListener('input', () => { let val = Math.max(5, Math.min(100, parseInt(toolSizeInput.value) || 5)); toolSize.value = val; });
         toolSizeInput.addEventListener('blur', () => { let val = Math.max(5, Math.min(100, parseInt(toolSizeInput.value) || 30)); toolSizeInput.value = val; toolSize.value = val; });
 
-        document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.tool-btn[data-tool]').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentTool = btn.dataset.tool; colorRow.style.display = (currentTool === 'brush-mosaic' || currentTool === 'eraser') ? 'none' : 'flex'; if (currentTool === 'rect') brushCursor.classList.remove('active'); }); });
+        document.querySelectorAll('.tool-btn[data-tool]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.tool-btn[data-tool]').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentTool = btn.dataset.tool; const isCrop = currentTool === 'crop'; colorRow.style.display = (currentTool === 'brush-mosaic' || currentTool === 'eraser' || isCrop) ? 'none' : 'flex'; sizeRow.style.display = isCrop ? 'none' : 'flex'; cropOptions.classList.toggle('active', isCrop); if (currentTool === 'rect' || isCrop) brushCursor.classList.remove('active'); if (isCrop && cropCurrentSize && originalImage) { cropCurrentSize.textContent = originalImage.width + ' x ' + originalImage.height; cropW.value = originalImage.width; cropH.value = originalImage.height; } }); });
+
+        let isDraggingCrop = false, dragCropStartX = 0, dragCropStartY = 0, dragCropEndX = 0, dragCropEndY = 0;
+        let cropPreviewCanvas = null;
+
+        function drawCropPreview() {
+            if (!cropPreviewCanvas || !originalImage) return;
+            editorCtx.drawImage(cropPreviewCanvas, 0, 0);
+            const x1 = Math.min(dragCropStartX, dragCropEndX);
+            const y1 = Math.min(dragCropStartY, dragCropEndY);
+            const w = Math.abs(dragCropEndX - dragCropStartX);
+            const h = Math.abs(dragCropEndY - dragCropStartY);
+            
+            editorCtx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            editorCtx.fillRect(0, 0, editorCanvas.width, y1);
+            editorCtx.fillRect(0, y1, x1, h);
+            editorCtx.fillRect(x1 + w, y1, editorCanvas.width - x1 - w, h);
+            editorCtx.fillRect(0, y1 + h, editorCanvas.width, editorCanvas.height - y1 - h);
+            
+            editorCtx.strokeStyle = '#ff6b96';
+            editorCtx.lineWidth = 2;
+            editorCtx.setLineDash([5, 5]);
+            editorCtx.strokeRect(x1, y1, w, h);
+            editorCtx.setLineDash([]);
+            
+            editorCtx.fillStyle = '#ff6b96';
+            editorCtx.fillRect(x1, y1 - 24, 80, 20);
+            editorCtx.fillStyle = 'white';
+            editorCtx.font = '12px Pretendard';
+            editorCtx.fillText(w + ' x ' + h, x1 + 5, y1 - 9);
+            
+            cropX.value = Math.max(0, x1);
+            cropY.value = Math.max(0, y1);
+            cropW.value = Math.max(0, w);
+            cropH.value = Math.max(0, h);
+        }
+
+        let lastCropX = 0, lastCropY = 0;
+
+        function applyCrop(startX, startY, w, h) {
+            if (!originalImage) return;
+            lastCropX = startX;
+            lastCropY = startY;
+            const cropW_val = Math.min(w, editorCanvas.width - startX);
+            const cropH_val = Math.min(h, editorCanvas.height - startY);
+            if (cropW_val <= 0 || cropH_val <= 0) return;
+            
+            const imageData = editorCtx.getImageData(startX, startY, cropW_val, cropH_val);
+            editorCanvas.width = cropW_val;
+            editorCanvas.height = cropH_val;
+            editorCtx.putImageData(imageData, 0, 0);
+            
+            if (cropCurrentSize) cropCurrentSize.textContent = cropW_val + ' x ' + cropH_val;
+            cropX.value = startX;
+            cropY.value = startY;
+            cropW.value = cropW_val;
+            cropH.value = cropH_val;
+            saveHistory();
+            showToast('자르기 완료!');
+        }
+
+        cropApplyBtn.addEventListener('click', () => {
+            const x = parseInt(cropX.value) || 0;
+            const y = parseInt(cropY.value) || 0;
+            const w = parseInt(cropW.value) || 100;
+            const h = parseInt(cropH.value) || 100;
+            applyCrop(x, y, w, h);
+        });
+
+        cropApplyAllBtn.addEventListener('click', async () => {
+            const useX = parseInt(cropX.value) || 0;
+            const useY = parseInt(cropY.value) || 0;
+            const targetW = parseInt(cropW.value) || 100;
+            const targetH = parseInt(cropH.value) || 100;
+            
+            for (let i = 0; i < selectedFiles.length; i++) {
+                if (i === editingIndex) continue;
+                const img = new Image();
+                await new Promise(r => { img.onload = r; img.src = filePreviews[i]; });
+                const startX = Math.max(0, Math.min(useX, img.width - targetW));
+                const startY = Math.max(0, Math.min(useY, img.height - targetH));
+                const cropW_val = Math.min(targetW, img.width - startX);
+                const cropH_val = Math.min(targetH, img.height - startY);
+                if (cropW_val <= 0 || cropH_val <= 0) continue;
+                const tcv = document.createElement('canvas');
+                tcv.width = cropW_val;
+                tcv.height = cropH_val;
+                tcv.getContext('2d').drawImage(img, startX, startY, cropW_val, cropH_val, 0, 0, cropW_val, cropH_val);
+                const blob = await new Promise(r => tcv.toBlob(r, 'image/png'));
+                const file = new File([blob], selectedFiles[i].name, { type: 'image/png' });
+                URL.revokeObjectURL(filePreviews[i]);
+                selectedFiles[i] = file;
+                filePreviews[i] = URL.createObjectURL(blob);
+            }
+            showToast(selectedFiles.length + '개 자르기 완료!');
+            updateImageGrid();
+        });
 
         undoBtn.addEventListener('click', undoEdit);
         redoBtn.addEventListener('click', redoEdit);
-
         function updateUndoRedoButtons() { undoBtn.disabled = historyStack.length <= 1; redoBtn.disabled = redoStack.length === 0; }
         function updateNavButtons() { imgPrevBtn.disabled = editingIndex <= 0; imgNextBtn.disabled = editingIndex >= selectedFiles.length - 1; }
-
         imgPrevBtn.addEventListener('click', () => { if (editingIndex > 0) tryNavigate(editingIndex - 1); });
         imgNextBtn.addEventListener('click', () => { if (editingIndex < selectedFiles.length - 1) tryNavigate(editingIndex + 1); });
 
-        function tryNavigate(newIndex) { if (hasChanges) { pendingAction = { type: 'navigate', index: newIndex }; saveModal.classList.add('active'); } else switchToImage(newIndex); }
+        function tryNavigate(ni) { if (hasChanges) { pendingAction = { type: 'navigate', index: ni }; saveModal.classList.add('active'); } else switchToImage(ni); }
         function tryClose() { if (hasChanges) { pendingAction = { type: 'close' }; saveModal.classList.add('active'); } else closeEditor(); }
-
-        saveModalDiscard.addEventListener('click', async () => { saveModal.classList.remove('active'); if (pendingAction) { if (pendingAction.type === 'navigate') switchToImage(pendingAction.index); else if (pendingAction.type === 'close') closeEditor(); pendingAction = null; } });
+        saveModalDiscard.addEventListener('click', () => { saveModal.classList.remove('active'); if (pendingAction) { if (pendingAction.type === 'navigate') switchToImage(pendingAction.index); else if (pendingAction.type === 'close') closeEditor(); pendingAction = null; } });
         saveModalCancel.addEventListener('click', () => { saveModal.classList.remove('active'); pendingAction = null; });
         saveModalSave.addEventListener('click', async () => { saveModal.classList.remove('active'); await applyEdit(); if (pendingAction) { if (pendingAction.type === 'navigate') switchToImage(pendingAction.index); else if (pendingAction.type === 'close') closeEditor(); pendingAction = null; } });
 
-        function switchToImage(newIndex) { editingIndex = newIndex; historyStack = []; redoStack = []; hasChanges = false; const img = new Image(); img.onload = () => { originalImage = img; const maxSize = 800; let w = img.width, h = img.height; if (w > maxSize || h > maxSize) { if (w > h) { h = (h / w) * maxSize; w = maxSize; } else { w = (w / h) * maxSize; h = maxSize; } } editorCanvas.width = w; editorCanvas.height = h; editorCtx.drawImage(img, 0, 0, w, h); originalCanvas = document.createElement('canvas'); originalCanvas.width = w; originalCanvas.height = h; originalCanvas.getContext('2d').drawImage(img, 0, 0, w, h); saveHistory(true); updateNavButtons(); }; img.src = filePreviews[newIndex]; }
+        function switchToImage(ni) { editingIndex = ni; historyStack = []; redoStack = []; hasChanges = false; const img = new Image(); img.onload = () => { originalImage = img; editorCanvas.width = img.width; editorCanvas.height = img.height; editorCtx.drawImage(img, 0, 0); originalCanvas = document.createElement('canvas'); originalCanvas.width = img.width; originalCanvas.height = img.height; originalCanvas.getContext('2d').drawImage(img, 0, 0); saveHistory(true); updateNavButtons(); if (currentTool === 'crop' && cropCurrentSize) { cropCurrentSize.textContent = img.width + ' x ' + img.height; } }; img.src = filePreviews[ni]; }
 
-        function openEditor(index) { editingIndex = index; historyStack = []; redoStack = []; hasChanges = false; const img = new Image(); img.onload = () => { originalImage = img; const maxSize = 800; let w = img.width, h = img.height; if (w > maxSize || h > maxSize) { if (w > h) { h = (h / w) * maxSize; w = maxSize; } else { w = (w / h) * maxSize; h = maxSize; } } editorCanvas.width = w; editorCanvas.height = h; editorCtx.drawImage(img, 0, 0, w, h); originalCanvas = document.createElement('canvas'); originalCanvas.width = w; originalCanvas.height = h; originalCanvas.getContext('2d').drawImage(img, 0, 0, w, h); saveHistory(true); updateNavButtons(); editorOverlay.classList.add('active'); document.body.classList.add('editor-open'); }; img.src = filePreviews[index]; }
+        function openEditor(idx) { editingIndex = idx; historyStack = []; redoStack = []; hasChanges = false; const img = new Image(); img.onload = () => { originalImage = img; editorCanvas.width = img.width; editorCanvas.height = img.height; editorCtx.drawImage(img, 0, 0); originalCanvas = document.createElement('canvas'); originalCanvas.width = img.width; originalCanvas.height = img.height; originalCanvas.getContext('2d').drawImage(img, 0, 0); saveHistory(true); updateNavButtons(); editorOverlay.classList.add('active'); document.body.classList.add('editor-open'); if (currentTool === 'crop' && cropCurrentSize) { cropCurrentSize.textContent = img.width + ' x ' + img.height; } }; img.src = filePreviews[idx]; }
 
-        function saveHistory(isInitial = false) { if (historyStack.length > 30) historyStack.shift(); historyStack.push(editorCanvas.toDataURL()); redoStack = []; updateUndoRedoButtons(); if (!isInitial) hasChanges = true; }
-        function undoEdit() { if (historyStack.length <= 1) return; redoStack.push(historyStack.pop()); const img = new Image(); img.onload = () => { editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height); editorCtx.drawImage(img, 0, 0); updateUndoRedoButtons(); }; img.src = historyStack[historyStack.length - 1]; }
-        function redoEdit() { if (redoStack.length === 0) return; const redo = redoStack.pop(); historyStack.push(redo); const img = new Image(); img.onload = () => { editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height); editorCtx.drawImage(img, 0, 0); updateUndoRedoButtons(); }; img.src = redo; }
+        function saveHistory(isInit = false) { if (historyStack.length > 30) historyStack.shift(); historyStack.push(editorCanvas.toDataURL()); redoStack = []; updateUndoRedoButtons(); if (!isInit) hasChanges = true; }
+        function undoEdit() { if (historyStack.length <= 1) return; redoStack.push(historyStack.pop()); const img = new Image(); img.onload = () => { editorCanvas.width = img.width; editorCanvas.height = img.height; editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height); editorCtx.drawImage(img, 0, 0); if (cropCurrentSize) cropCurrentSize.textContent = img.width + ' x ' + img.height; updateUndoRedoButtons(); }; img.src = historyStack[historyStack.length - 1]; }
+        function redoEdit() { if (redoStack.length === 0) return; const rd = redoStack.pop(); historyStack.push(rd); const img = new Image(); img.onload = () => { editorCanvas.width = img.width; editorCanvas.height = img.height; editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height); editorCtx.drawImage(img, 0, 0); if (cropCurrentSize) cropCurrentSize.textContent = img.width + ' x ' + img.height; updateUndoRedoButtons(); }; img.src = rd; }
 
-        function drawMosaic(x, y, size) { const blockSize = Math.max(8, Math.floor(size / 3)), half = size / 2, sx = Math.max(0, Math.floor(x - half)), sy = Math.max(0, Math.floor(y - half)), ex = Math.min(editorCanvas.width, Math.ceil(x + half)), ey = Math.min(editorCanvas.height, Math.ceil(y + half)), imageData = editorCtx.getImageData(sx, sy, ex - sx, ey - sy), data = imageData.data; for (let by = 0; by < ey - sy; by += blockSize) { for (let bx = 0; bx < ex - sx; bx += blockSize) { let r = 0, g = 0, b = 0, count = 0; for (let py = by; py < Math.min(by + blockSize, ey - sy); py++) { for (let px = bx; px < Math.min(bx + blockSize, ex - sx); px++) { const i = (py * (ex - sx) + px) * 4; r += data[i]; g += data[i + 1]; b += data[i + 2]; count++; } } r = Math.floor(r / count); g = Math.floor(g / count); b = Math.floor(b / count); for (let py = by; py < Math.min(by + blockSize, ey - sy); py++) { for (let px = bx; px < Math.min(bx + blockSize, ex - sx); px++) { const i = (py * (ex - sx) + px) * 4; data[i] = r; data[i + 1] = g; data[i + 2] = b; } } } } editorCtx.putImageData(imageData, sx, sy); }
+        function drawMosaic(x, y, size) { const bs = Math.max(8, Math.floor(size / 3)), half = size / 2, sx = Math.max(0, Math.floor(x - half)), sy = Math.max(0, Math.floor(y - half)), ex = Math.min(editorCanvas.width, Math.ceil(x + half)), ey = Math.min(editorCanvas.height, Math.ceil(y + half)), id = editorCtx.getImageData(sx, sy, ex - sx, ey - sy), d = id.data; for (let by = 0; by < ey - sy; by += bs) { for (let bx = 0; bx < ex - sx; bx += bs) { let r = 0, g = 0, b = 0, c = 0; for (let py = by; py < Math.min(by + bs, ey - sy); py++) { for (let px = bx; px < Math.min(bx + bs, ex - sx); px++) { const i = (py * (ex - sx) + px) * 4; r += d[i]; g += d[i + 1]; b += d[i + 2]; c++; } } r = Math.floor(r / c); g = Math.floor(g / c); b = Math.floor(b / c); for (let py = by; py < Math.min(by + bs, ey - sy); py++) { for (let px = bx; px < Math.min(bx + bs, ex - sx); px++) { const i = (py * (ex - sx) + px) * 4; d[i] = r; d[i + 1] = g; d[i + 2] = b; } } } } editorCtx.putImageData(id, sx, sy); }
 
         function drawBrush(x, y, size, color) { editorCtx.beginPath(); editorCtx.arc(x, y, size / 2, 0, Math.PI * 2); editorCtx.fillStyle = color; editorCtx.fill(); }
         function drawBrushLine(x1, y1, x2, y2, size, color) { editorCtx.beginPath(); editorCtx.moveTo(x1, y1); editorCtx.lineTo(x2, y2); editorCtx.strokeStyle = color; editorCtx.lineWidth = size; editorCtx.lineCap = 'round'; editorCtx.stroke(); }
-        function drawEraser(x, y, size) { if (!originalCanvas) return; const radius = size / 2; editorCtx.save(); editorCtx.beginPath(); editorCtx.arc(x, y, radius, 0, Math.PI * 2); editorCtx.clip(); editorCtx.drawImage(originalCanvas, 0, 0); editorCtx.restore(); }
+        function drawEraser(x, y, size) { if (!originalCanvas) return; const r = size / 2; editorCtx.save(); editorCtx.beginPath(); editorCtx.arc(x, y, r, 0, Math.PI * 2); editorCtx.clip(); editorCtx.drawImage(originalCanvas, 0, 0); editorCtx.restore(); }
         function drawEraserLine(x1, y1, x2, y2, size) { if (!originalCanvas) return; const dist = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), steps = Math.max(1, Math.floor(dist / (size / 4))); for (let i = 0; i <= steps; i++) { const t = i / steps; drawEraser(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t, size); } }
 
-        editorCanvas.addEventListener('mousedown', (e) => { isDrawing = true; const rect = editorCanvas.getBoundingClientRect(), scaleX = editorCanvas.width / rect.width, scaleY = editorCanvas.height / rect.height; lastX = (e.clientX - rect.left) * scaleX; lastY = (e.clientY - rect.top) * scaleY; startX = lastX; startY = lastY; if (currentTool === 'rect') { tempCanvas = document.createElement('canvas'); tempCanvas.width = editorCanvas.width; tempCanvas.height = editorCanvas.height; tempCanvas.getContext('2d').drawImage(editorCanvas, 0, 0); } else if (currentTool === 'brush-mosaic') drawMosaic(lastX, lastY, parseInt(toolSize.value)); else if (currentTool === 'brush-color') drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value); else if (currentTool === 'eraser') drawEraser(lastX, lastY, parseInt(toolSize.value)); });
-        editorCanvas.addEventListener('mousemove', (e) => { if (!isDrawing) return; const rect = editorCanvas.getBoundingClientRect(), scaleX = editorCanvas.width / rect.width, scaleY = editorCanvas.height / rect.height, x = (e.clientX - rect.left) * scaleX, y = (e.clientY - rect.top) * scaleY; if (currentTool === 'brush-mosaic') drawMosaic(x, y, parseInt(toolSize.value)); else if (currentTool === 'brush-color') drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value); else if (currentTool === 'eraser') drawEraserLine(lastX, lastY, x, y, parseInt(toolSize.value)); else if (currentTool === 'rect' && tempCanvas) { editorCtx.drawImage(tempCanvas, 0, 0); editorCtx.strokeStyle = toolColor.value; editorCtx.lineWidth = 2; editorCtx.setLineDash([5, 5]); editorCtx.strokeRect(Math.min(startX, x), Math.min(startY, y), Math.abs(x - startX), Math.abs(y - startY)); editorCtx.setLineDash([]); } lastX = x; lastY = y; });
-        editorCanvas.addEventListener('mouseup', (e) => { if (!isDrawing) return; isDrawing = false; if (currentTool === 'rect' && tempCanvas) { const rect = editorCanvas.getBoundingClientRect(), scaleX = editorCanvas.width / rect.width, scaleY = editorCanvas.height / rect.height, x = (e.clientX - rect.left) * scaleX, y = (e.clientY - rect.top) * scaleY; editorCtx.drawImage(tempCanvas, 0, 0); editorCtx.fillStyle = toolColor.value; editorCtx.fillRect(Math.min(startX, x), Math.min(startY, y), Math.abs(x - startX), Math.abs(y - startY)); tempCanvas = null; } saveHistory(); });
-        editorCanvas.addEventListener('mouseleave', () => { if (isDrawing && currentTool !== 'rect') { isDrawing = false; saveHistory(); } });
+        editorCanvas.addEventListener('mousedown', (e) => { 
+            const rect = editorCanvas.getBoundingClientRect();
+            const scaleX = editorCanvas.width / rect.width;
+            const scaleY = editorCanvas.height / rect.height;
+            
+            if (currentTool === 'crop') { 
+                isDraggingCrop = true; 
+                dragCropStartX = Math.round((e.clientX - rect.left) * scaleX); 
+                dragCropStartY = Math.round((e.clientY - rect.top) * scaleY);
+                dragCropEndX = dragCropStartX;
+                dragCropEndY = dragCropStartY;
+                cropPreviewCanvas = document.createElement('canvas');
+                cropPreviewCanvas.width = editorCanvas.width;
+                cropPreviewCanvas.height = editorCanvas.height;
+                cropPreviewCanvas.getContext('2d').drawImage(editorCanvas, 0, 0);
+                return; 
+            }
+            
+            isDrawing = true; 
+            lastX = (e.clientX - rect.left) * scaleX; 
+            lastY = (e.clientY - rect.top) * scaleY; 
+            startX = lastX; 
+            startY = lastY; 
+            if (currentTool === 'rect') { 
+                tempCanvas = document.createElement('canvas'); 
+                tempCanvas.width = editorCanvas.width; 
+                tempCanvas.height = editorCanvas.height; 
+                tempCanvas.getContext('2d').drawImage(editorCanvas, 0, 0); 
+            } else if (currentTool === 'brush-mosaic') drawMosaic(lastX, lastY, parseInt(toolSize.value)); 
+            else if (currentTool === 'brush-color') drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value); 
+            else if (currentTool === 'eraser') drawEraser(lastX, lastY, parseInt(toolSize.value)); 
+        });
 
-        function handleTouchStart(e) { e.preventDefault(); if (e.touches.length !== 1) return; const touch = e.touches[0], rect = editorCanvas.getBoundingClientRect(), scaleX = editorCanvas.width / rect.width, scaleY = editorCanvas.height / rect.height; isDrawing = true; lastX = (touch.clientX - rect.left) * scaleX; lastY = (touch.clientY - rect.top) * scaleY; startX = lastX; startY = lastY; if (currentTool === 'rect') { tempCanvas = document.createElement('canvas'); tempCanvas.width = editorCanvas.width; tempCanvas.height = editorCanvas.height; tempCanvas.getContext('2d').drawImage(editorCanvas, 0, 0); } else if (currentTool === 'brush-mosaic') drawMosaic(lastX, lastY, parseInt(toolSize.value)); else if (currentTool === 'brush-color') drawBrush(lastX, lastY, parseInt(toolSize.value), toolColor.value); else if (currentTool === 'eraser') drawEraser(lastX, lastY, parseInt(toolSize.value)); }
-        function handleTouchMove(e) { e.preventDefault(); if (!isDrawing || e.touches.length !== 1) return; const touch = e.touches[0], rect = editorCanvas.getBoundingClientRect(), scaleX = editorCanvas.width / rect.width, scaleY = editorCanvas.height / rect.height, x = (touch.clientX - rect.left) * scaleX, y = (touch.clientY - rect.top) * scaleY; if (currentTool === 'brush-mosaic') drawMosaic(x, y, parseInt(toolSize.value)); else if (currentTool === 'brush-color') drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value); else if (currentTool === 'eraser') drawEraserLine(lastX, lastY, x, y, parseInt(toolSize.value)); else if (currentTool === 'rect' && tempCanvas) { editorCtx.drawImage(tempCanvas, 0, 0); editorCtx.strokeStyle = toolColor.value; editorCtx.lineWidth = 2; editorCtx.setLineDash([5, 5]); editorCtx.strokeRect(Math.min(startX, x), Math.min(startY, y), Math.abs(x - startX), Math.abs(y - startY)); editorCtx.setLineDash([]); } lastX = x; lastY = y; }
-        function handleTouchEnd(e) { e.preventDefault(); if (!isDrawing) return; isDrawing = false; if (currentTool === 'rect' && tempCanvas) { editorCtx.drawImage(tempCanvas, 0, 0); editorCtx.fillStyle = toolColor.value; editorCtx.fillRect(Math.min(startX, lastX), Math.min(startY, lastY), Math.abs(lastX - startX), Math.abs(lastY - startY)); tempCanvas = null; } saveHistory(); }
+        editorCanvas.addEventListener('mousemove', (e) => { 
+            const rect = editorCanvas.getBoundingClientRect();
+            const scaleX = editorCanvas.width / rect.width;
+            const scaleY = editorCanvas.height / rect.height;
+            
+            if (currentTool === 'crop' && isDraggingCrop) { 
+                dragCropEndX = Math.round((e.clientX - rect.left) * scaleX); 
+                dragCropEndY = Math.round((e.clientY - rect.top) * scaleY);
+                dragCropEndX = Math.max(0, Math.min(editorCanvas.width, dragCropEndX));
+                dragCropEndY = Math.max(0, Math.min(editorCanvas.height, dragCropEndY));
+                drawCropPreview();
+                return; 
+            } 
+            
+            if (!isDrawing || currentTool === 'crop') return;
+            const x = (e.clientX - rect.left) * scaleX, y = (e.clientY - rect.top) * scaleY; 
+            if (currentTool === 'brush-mosaic') drawMosaic(x, y, parseInt(toolSize.value)); 
+            else if (currentTool === 'brush-color') drawBrushLine(lastX, lastY, x, y, parseInt(toolSize.value), toolColor.value); 
+            else if (currentTool === 'eraser') drawEraserLine(lastX, lastY, x, y, parseInt(toolSize.value)); 
+            else if (currentTool === 'rect' && tempCanvas) { 
+                editorCtx.drawImage(tempCanvas, 0, 0); 
+                editorCtx.strokeStyle = toolColor.value; 
+                editorCtx.lineWidth = 2; 
+                editorCtx.setLineDash([5, 5]); 
+                editorCtx.strokeRect(Math.min(startX, x), Math.min(startY, y), Math.abs(x - startX), Math.abs(y - startY)); 
+                editorCtx.setLineDash([]); 
+            } 
+            lastX = x; 
+            lastY = y; 
+        });
 
-        editorCanvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        editorCanvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        editorCanvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+        editorCanvas.addEventListener('mouseup', (e) => { 
+            if (currentTool === 'crop' && isDraggingCrop) { 
+                isDraggingCrop = false;
+                if (cropPreviewCanvas) {
+                    editorCtx.drawImage(cropPreviewCanvas, 0, 0);
+                    cropPreviewCanvas = null;
+                }
+                return; 
+            } 
+            if (!isDrawing || currentTool === 'crop') return; 
+            isDrawing = false; 
+            if (currentTool === 'rect' && tempCanvas) { 
+                const rect = editorCanvas.getBoundingClientRect();
+                const scaleX = editorCanvas.width / rect.width;
+                const scaleY = editorCanvas.height / rect.height;
+                const x = (e.clientX - rect.left) * scaleX, y = (e.clientY - rect.top) * scaleY; 
+                editorCtx.drawImage(tempCanvas, 0, 0); 
+                editorCtx.fillStyle = toolColor.value; 
+                editorCtx.fillRect(Math.min(startX, x), Math.min(startY, y), Math.abs(x - startX), Math.abs(y - startY)); 
+                tempCanvas = null; 
+            } 
+            saveHistory(); 
+        });
+
+        editorCanvas.addEventListener('mouseleave', () => { 
+            if (isDrawing && currentTool !== 'rect' && currentTool !== 'crop') { isDrawing = false; saveHistory(); } 
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (currentTool !== 'crop' || !isDraggingCrop) return;
+            const rect = editorCanvas.getBoundingClientRect();
+            const scaleX = editorCanvas.width / rect.width;
+            const scaleY = editorCanvas.height / rect.height;
+            dragCropEndX = Math.round((e.clientX - rect.left) * scaleX);
+            dragCropEndY = Math.round((e.clientY - rect.top) * scaleY);
+            dragCropEndX = Math.max(0, Math.min(editorCanvas.width, dragCropEndX));
+            dragCropEndY = Math.max(0, Math.min(editorCanvas.height, dragCropEndY));
+            drawCropPreview();
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (currentTool !== 'crop' || !isDraggingCrop) return;
+            isDraggingCrop = false;
+            if (cropPreviewCanvas) {
+                editorCtx.drawImage(cropPreviewCanvas, 0, 0);
+                cropPreviewCanvas = null;
+            }
+        });
 
         editorClose.addEventListener('click', tryClose);
         editorCancel.addEventListener('click', tryClose);
+        function closeEditor() { editorOverlay.classList.remove('active'); document.body.classList.remove('editor-open'); brushCursor.classList.remove('active'); cropOverlay.classList.remove('active'); editingIndex = null; historyStack = []; redoStack = []; hasChanges = false; isDraggingCrop = false; cropPreviewCanvas = null; }
 
-        function closeEditor() { editorOverlay.classList.remove('active'); document.body.classList.remove('editor-open'); brushCursor.classList.remove('active'); editingIndex = null; historyStack = []; redoStack = []; hasChanges = false; }
-
-        async function applyEdit() { if (editingIndex === null) return; const finalCanvas = document.createElement('canvas'); finalCanvas.width = originalImage.width; finalCanvas.height = originalImage.height; const finalCtx = finalCanvas.getContext('2d'); finalCtx.drawImage(originalImage, 0, 0); finalCtx.drawImage(editorCanvas, 0, 0, originalImage.width, originalImage.height); const blob = await new Promise(r => finalCanvas.toBlob(r, 'image/png')), file = new File([blob], selectedFiles[editingIndex].name, { type: 'image/png' }); URL.revokeObjectURL(filePreviews[editingIndex]); selectedFiles[editingIndex] = file; filePreviews[editingIndex] = URL.createObjectURL(blob); hasChanges = false; updateImageGrid(); }
+        async function applyEdit() { if (editingIndex === null || !originalImage) return; const blob = await new Promise(r => editorCanvas.toBlob(r, 'image/png')), file = new File([blob], selectedFiles[editingIndex].name, { type: 'image/png' }); URL.revokeObjectURL(filePreviews[editingIndex]); selectedFiles[editingIndex] = file; filePreviews[editingIndex] = URL.createObjectURL(blob); hasChanges = false; updateImageGrid(); }
 
         editorSave.addEventListener('click', async () => { await applyEdit(); closeEditor(); });
 

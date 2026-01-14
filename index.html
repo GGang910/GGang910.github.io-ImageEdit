@@ -520,9 +520,16 @@
                 const buffer = await file.arrayBuffer();
                 const uint8 = new Uint8Array(buffer);
                 
-                if (file.type === 'image/png') {
+                // PNG 시그니처: 89 50 4E 47
+                const isPNG = uint8[0] === 0x89 && uint8[1] === 0x50 && uint8[2] === 0x4E && uint8[3] === 0x47;
+                // JPEG 시그니처: FF D8 FF
+                const isJPEG = uint8[0] === 0xFF && uint8[1] === 0xD8 && uint8[2] === 0xFF;
+                // WebP 시그니처: RIFF....WEBP
+                const isWebP = uint8[0] === 0x52 && uint8[1] === 0x49 && uint8[2] === 0x46 && uint8[3] === 0x46 && uint8[8] === 0x57 && uint8[9] === 0x45 && uint8[10] === 0x42 && uint8[11] === 0x50;
+                
+                if (isPNG) {
                     let offset = 8;
-                    const metaChunks = ['tEXt','iTXt','zTXt','eXIf','iCCP'];
+                    const metaChunks = ['tEXt','iTXt','zTXt','eXIf'];
                     while (offset < buffer.byteLength - 12) {
                         const type = String.fromCharCode(uint8[offset+4], uint8[offset+5], uint8[offset+6], uint8[offset+7]);
                         if (metaChunks.includes(type)) return true;
@@ -533,13 +540,12 @@
                     return false;
                 }
                 
-                if (file.type === 'image/jpeg') {
+                if (isJPEG) {
                     let offset = 2;
                     while (offset < buffer.byteLength - 4) {
                         if (uint8[offset] !== 0xFF) { offset++; continue; }
                         const marker = uint8[offset + 1];
-                        if (marker >= 0xE1 && marker <= 0xEF) return true;
-                        if (marker === 0xFE) return true;
+                        if (marker === 0xE1 || marker === 0xED || marker === 0xFE) return true;
                         if (marker === 0xDA || marker === 0xD9) break;
                         if (marker === 0xD8 || (marker >= 0xD0 && marker <= 0xD7)) { offset += 2; continue; }
                         const length = (uint8[offset + 2] << 8) | uint8[offset + 3];
@@ -548,12 +554,11 @@
                     return false;
                 }
                 
-                if (file.type === 'image/webp') {
+                if (isWebP) {
                     let offset = 12;
-                    const metaChunks = ['EXIF','XMP ','ICCP'];
                     while (offset < buffer.byteLength - 8) {
                         const fourCC = String.fromCharCode(uint8[offset], uint8[offset+1], uint8[offset+2], uint8[offset+3]);
-                        if (metaChunks.includes(fourCC)) return true;
+                        if (fourCC === 'EXIF' || fourCC === 'XMP ') return true;
                         const size = uint8[offset+4] | (uint8[offset+5] << 8) | (uint8[offset+6] << 16) | (uint8[offset+7] << 24);
                         offset += 8 + size + (size % 2);
                     }
